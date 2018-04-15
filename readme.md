@@ -7,6 +7,7 @@ Some major tasks from Python course
 ### Week 2
 
 * [Storage](week_2/storage) ([task](https://www.coursera.org/learn/programming-in-python/programming/nc6Ce/key-value-khranilishchie)) – key-value storage
+* [to_json](week_2/to_json) ([task](https://www.coursera.org/learn/programming-in-python/programming/0664k/diekorator-to-json)) – to_json decorator
 
 ## About course
 **Course page**: [Programming in Python](https://www.coursera.org/learn/programming-in-python/)
