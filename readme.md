@@ -1,5 +1,13 @@
 # My Coursera works
 
+Some major tasks from Python course
+
+## Tasks
+
+### Week 2
+
+* [Storage](week_2/storage) ([task](https://www.coursera.org/learn/programming-in-python/programming/nc6Ce/key-value-khranilishchie)) – key-value storage
+
 ## About course
 **Course page**: [Programming in Python](https://www.coursera.org/learn/programming-in-python/)
 
