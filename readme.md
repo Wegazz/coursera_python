@@ -12,6 +12,9 @@ Some major tasks from Python course
 * [File reader](week_3/file_reader) ([task](https://www.coursera.org/learn/programming-in-python/programming/W3QfI/riealizatsiia-prostogho-klassa-dlia-chtieniia-iz-faila)) – FileReader class
 * [Cars](week_3/cars) ([task](https://www.coursera.org/learn/programming-in-python/programming/bd6aI/klassy-i-nasliedovaniie)) – csv parsing to cars
 
+### Week 4
+* [Simple container](week_4/container) ([task](https://www.coursera.org/learn/programming-in-python/lecture/tpT6t/maghichieskiie-mietody)) – simple container
+
 ## About course
 **Course page**: [Programming in Python](https://www.coursera.org/learn/programming-in-python/)
 
