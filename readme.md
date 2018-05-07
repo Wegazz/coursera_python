@@ -14,6 +14,7 @@ Some major tasks from Python course
 
 ### Week 4
 * [Simple container](week_4/container) ([task](https://www.coursera.org/learn/programming-in-python/lecture/tpT6t/maghichieskiie-mietody)) – simple container
+* [File class](week_4/file_class) ([task](https://www.coursera.org/learn/programming-in-python/programming/sypSV/fail-s-maghichieskimi-mietodami)) – wrapper for file
 
 ## About course
 **Course page**: [Programming in Python](https://www.coursera.org/learn/programming-in-python/)
