@@ -17,6 +17,10 @@ Some major tasks from Python course
 * [File class](week_4/file_class) ([task](https://www.coursera.org/learn/programming-in-python/programming/sypSV/fail-s-maghichieskimi-mietodami)) – wrapper for file
 * [Comission](week_4/comission) ([task](https://www.coursera.org/learn/programming-in-python/programming/HmHYs/dieskriptor-s-komissiiei)) – descriptor
 
+### Week 5
+* [Client](week_5/client) ([task](https://www.coursera.org/learn/programming-in-python/programming/aG3x3/kliient-dlia-otpravki-mietrik)) – TCP metric client
+
+
 ## About course
 **Course page**: [Programming in Python](https://www.coursera.org/learn/programming-in-python/)
 
