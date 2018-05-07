@@ -7,47 +7,44 @@ class Client:
     RECV_BUFFER_SIZE = 1024
 
     def __init__(self, host, port, timeout=None):
-        self.sock = socket.create_connection((host, port), timeout=timeout)
+        try:
+            self.connection = socket.create_connection((host, port), timeout)
+        except socket.error as e:
+            raise ClientSocketError(e)
 
     def __enter__(self):
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        self.sock.close()
+        self.connection.close()
+
+    def request(self, request):
+        try:
+            self.connection.sendall(request.encode())
+            byte_buffer = b''
+            while not byte_buffer.endswith(b'\n\n'):
+                byte_buffer += self.connection.recv(self.RECV_BUFFER_SIZE)
+            result = byte_buffer.decode().split('\n')
+            if result[0] == 'error' or result[0] != 'ok':
+                raise ClientProtocolError(result)
+            return result[1:-2]
+        except socket.error as e:
+            raise ClientSocketError(e)
 
     def put(self, key, value, timestamp=None):
-        byte_buffer = b''
-        try:
-            self.sock.sendall('put {key} {value} {timestamp}\n'
-                              .format(key=key, value=str(value),
-                                      timestamp=str(timestamp) or str(int(time.time()))).encode())
-            while not byte_buffer.endswith(b'\n\n'):
-                byte_buffer += self.sock.recv(self.RECV_BUFFER_SIZE)
-        except Exception as e:
-            raise ClientError(e, text=byte_buffer)
-
-        if byte_buffer != b'ok\n\n':
-            raise ClientError(text=byte_buffer)
+        self.request('put {key} {value} {timestamp}\n'.format(key=key, value=str(value),
+                                                              timestamp=str(timestamp) or str(int(time.time()))))
 
     def get(self, key):
-        byte_buffer = b''
-        try:
-            self.sock.sendall('get {key}\n'.format(key=str(key)).encode())
-            while not byte_buffer.endswith(b'\n\n'):
-                byte_buffer += self.sock.recv(self.RECV_BUFFER_SIZE)
-        except Exception as e:
-            raise ClientError(e, text=byte_buffer)
-
-        buffer = byte_buffer[:-2].decode().split('\n')
-        if buffer[0] == 'error' or buffer[0] != 'ok':
-            raise ClientError(text=byte_buffer)
-
         result = {}
-        for line in buffer[1:]:
-            metric, value, timestamp = tuple(line.split())
-            if metric not in result:
-                result[metric] = []
-            result[metric].append((int(timestamp), float(value)))
+        for line in self.request(f'get {key}\n'):
+            try:
+                metric, value, timestamp = line.split()
+                if metric not in result:
+                    result[metric] = []
+                result[metric].append((int(timestamp), float(value)))
+            except (ValueError, TypeError) as e:
+                raise ClientProtocolError(e)
 
         for val in result.values():
             val.sort(key=itemgetter(0))
@@ -56,9 +53,18 @@ class Client:
 
 
 class ClientError(Exception):
-    def __init__(self, exception=None, text=None):
-        self.exception = exception
-        self.text = text
+    """Общий класс исключений клиента"""
+    pass
+
+
+class ClientSocketError(ClientError):
+    """Исключение, выбрасываемое клиентом при сетевой ошибке"""
+    pass
+
+
+class ClientProtocolError(ClientError):
+    """Исключение, выбрасываемое клиентом при ошибке протокола"""
+    pass
 
 
 if __name__ == '__main__':
