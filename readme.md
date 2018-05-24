@@ -22,6 +22,9 @@ Some major tasks from Python course
 ### Week 5 — Threads, async, sockets ([summary](week_5/W5.pdf))
 * [Client](week_5/client) ([task](https://www.coursera.org/learn/programming-in-python/programming/aG3x3/kliient-dlia-otpravki-mietrik)) — TCP metric client
 
+### Week 6 — Final task
+* [Server](week_6/server) ([task](https://www.coursera.org/learn/programming-in-python/programming/Xcdpa/siervier-dlia-priiema-mietrik)) — TCP metric server
+
 
 ## About course
 **Course page**: [Programming in Python](https://www.coursera.org/learn/programming-in-python/)
